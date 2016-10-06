@@ -25,3 +25,14 @@ User.create!(name: "Example user",
                activated: true,
                activated_at: Time.zone.now)
 end
+
+users = User.order(:created_at).take(6)
+
+users.each do |user|
+  50.times do
+    content = Faker::ChuckNorris.fact
+    if content.length <= 140
+      user.microposts.create!(content: content)
+    end
+  end
+end
